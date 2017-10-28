@@ -177,8 +177,27 @@ a1533.Count(s => s == 3);         // → 2
 a1533.Any(); // → true
 empty.Any(); // → false
 ```
+### 配列の重複&重複じゃない数を出力
+```csharp
+var sample_list = new string[] { sample[0], sample[1], sample[2], sample[3] };
+            List<string> duplicates =
+               sample_list.GroupBy(x => x)
+               .Where(g => g.Count() > 1)
+               .Select(g => g.FirstOrDefault()).ToList();
+            List<string> notDuplicates =
+                sample_list.Distinct().ToList();
 
-# ショートカット
+            foreach (var duplicate in duplicates)
+            {
+                Console.WriteLine(duplicate);
+            }
+            foreach (var notDuplicate in notDuplicates)
+            {
+                Console.WriteLine(notDuplicate);
+            }
+```
+
+# ショートカット　（Mac?)
 ### 参考
 - https://qiita.com/kengop/items/ac9b57404d30e0cfdd20
 - http://useless.hatenablog.com/entry/2016/07/25/190000
@@ -231,3 +250,22 @@ empty.Any(); // → false
 - 検索画面に単語を入力
 - "∨"をクリックし、置換画面を表示
 - 置換後の単語を入力し、Enter
+
+# VisualStudio操作方法
+### クラスのアセンブリの追加方法
+1. 「追加したいクラス名　+ MSDN」で検索
+2. どのアセンブリに属しているか調べる
+3. visualstudioのソリューションエクスプローラーの参照フォルダを右クリック
+4. 参照の追加を選択
+5. 参照マネージャーダイアログの左側ペイで、アセンブリ-フレームワークを選択
+6. 一覧から調べたアセンブリ名を選択し、OKをクリック
+
+### 値型にnullを設定する方法
+```csharp
+int? num = null;
+if (num.HasValue){
+Console.WrireLine("num = {0}", num.Value);
+} else {
+  Console.WriteLine("num = null");
+}
+```
